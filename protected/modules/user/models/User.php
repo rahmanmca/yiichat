@@ -15,6 +15,10 @@ class User extends CActiveRecord
 	 * @var string $username
 	 * @var string $password
 	 * @var string $email
+	 * @var string $nickname
+	 * @var string $country
+	 * @var string $state
+	 * @var string $city
 	 * @var string $activkey
 	 * @var integer $createtime
 	 * @var integer $lastvisit
@@ -57,18 +61,22 @@ class User extends CActiveRecord
 			array('username', 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u','message' => UserModule::t("Incorrect symbols (A-z0-9).")),
 			array('status', 'in', 'range'=>array(self::STATUS_NOACTIVE,self::STATUS_ACTIVE,self::STATUS_BANNED)),
 			array('superuser', 'in', 'range'=>array(0,1)),
-            array('create_at', 'default', 'value' => date('Y-m-d H:i:s'), 'setOnEmpty' => true, 'on' => 'insert'),
-            array('lastvisit_at', 'default', 'value' => '0000-00-00 00:00:00', 'setOnEmpty' => true, 'on' => 'insert'),
+            		array('create_at', 'default', 'value' => date('Y-m-d H:i:s'), 'setOnEmpty' => true, 'on' => 'insert'),
+            		array('lastvisit_at', 'default', 'value' => '0000-00-00 00:00:00', 'setOnEmpty' => true, 'on' => 'insert'),
 			array('username, email, superuser, status', 'required'),
 			array('superuser, status', 'numerical', 'integerOnly'=>true),
 			array('id, username, password, email, activkey, create_at, lastvisit, superuser, status', 'safe', 'on'=>'search'),
 		):((Yii::app()->user->id==$this->id)?array(
-			array('username, email', 'required'),
+			array('username, email, nickname', 'required'),
 			array('username', 'length', 'max'=>20, 'min' => 3,'message' => UserModule::t("Incorrect username (length between 3 and 20 characters).")),
 			array('email', 'email'),
 			array('username', 'unique', 'message' => UserModule::t("This user's name already exists.")),
 			array('username', 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u','message' => UserModule::t("Incorrect symbols (A-z0-9).")),
 			array('email', 'unique', 'message' => UserModule::t("This user's email address already exists.")),
+			array('nickname', 'unique', 'message' => UserModule::t("This nick name already exists.")),
+			array('country', 'length', 'max'=>20, 'min' => 3,'message' => UserModule::t("Incorrect Country (length between 3 and 20 characters).")),
+			array('state', 'length', 'max'=>20, 'min' => 3,'message' => UserModule::t("Incorrect State(length between 3 and 20 characters).")),
+			array('city', 'length', 'max'=>20, 'min' => 3,'message' => UserModule::t("Incorrect City (length between 3 and 20 characters).")),
 		):array()));
 	}
 
@@ -94,6 +102,10 @@ class User extends CActiveRecord
 			'password'=>UserModule::t("password"),
 			'verifyPassword'=>UserModule::t("Retype Password"),
 			'email'=>UserModule::t("E-mail"),
+			'nickname'=>UserModule::t("Nick Name"),
+			'country'=>UserModule::t("Country"),
+			'state'=>UserModule::t("State"),
+			'city' => UserModule::t("City"),
 			'verifyCode'=>UserModule::t("Verification Code"),
 			'activkey' => UserModule::t("activation key"),
 			'createtime' => UserModule::t("Registration date"),
@@ -120,7 +132,7 @@ class User extends CActiveRecord
                 'condition'=>'superuser=1',
             ),
             'notsafe'=>array(
-            	'select' => 'id, username, password, email, activkey, create_at, lastvisit, superuser, status',
+            	'select' => 'id, username, password, email, nickname, country, state, city, activkey, create_at, lastvisit, superuser, status',
             ),
         );
     }
@@ -129,7 +141,7 @@ class User extends CActiveRecord
     {
         return CMap::mergeArray(Yii::app()->getModule('user')->defaultScope,array(
             'alias'=>'user',
-            'select' => 'user.id, user.username, user.email, user.create_at, user.lastvisit, user.superuser, user.status',
+            'select' => 'user.id, user.username, user.email, user.nickname, user.country, user.state, user.city, user.create_at, user.lastvisit, user.superuser, user.status',
         ));
     }
 	
@@ -166,6 +178,10 @@ class User extends CActiveRecord
         $criteria->compare('username',$this->username,true);
         $criteria->compare('password',$this->password);
         $criteria->compare('email',$this->email,true);
+        $criteria->compare('nickname',$this->nickname,true);
+        $criteria->compare('country',$this->country,true);
+        $criteria->compare('state',$this->state,true);
+        $criteria->compare('city',$this->city,true);
         $criteria->compare('activkey',$this->activkey);
         $criteria->compare('create_at',$this->create_at);
         $criteria->compare('lastvisit',$this->lastvisit);

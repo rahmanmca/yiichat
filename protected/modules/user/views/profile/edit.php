@@ -7,7 +7,8 @@ $this->menu=array(
 	((UserModule::isAdmin())
 		?array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin'))
 		:array()),
-    array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
+    //array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
+    array('label'=>UserModule::t('Home'), 'url'=>array('/site')),
     array('label'=>UserModule::t('Profile'), 'url'=>array('/user/profile')),
     array('label'=>UserModule::t('Change password'), 'url'=>array('changepassword')),
     array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
@@ -63,6 +64,30 @@ $this->menu=array(
 		<?php echo $form->labelEx($model,'email'); ?>
 		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'email'); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'nickname'); ?>
+		<?php echo $form->textField($model,'nickname',array('maxlength'=>20)); ?>
+		<?php echo $form->error($model,'nickname'); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'country'); ?>
+		<?php echo $form->textField($model,'country',array('maxlength'=>20)); ?>
+		<?php echo $form->error($model,'country'); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'state'); ?>
+		<?php echo $form->textField($model,'state',array('maxlength'=>20)); ?>
+		<?php echo $form->error($model,'state'); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'city'); ?>
+		<?php echo $form->textField($model,'city',array('maxlength'=>20)); ?>
+		<?php echo $form->error($model,'city'); ?>
 	</div>
 
 	<div class="row buttons">

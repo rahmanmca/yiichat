@@ -54,6 +54,8 @@ $this->breadcrumbs=array(
 	<?php echo $form->error($model,'email'); ?>
 	</div>
 	
+	
+	
 <?php 
 		$profileFields=$profile->getFields();
 		if ($profileFields) {
@@ -78,6 +80,31 @@ $this->breadcrumbs=array(
 			}
 		}
 ?>
+
+	<div class="row">
+	<?php echo $form->labelEx($model,'nickname'); ?>
+	<?php echo $form->textField($model,'nickname'); ?>
+	<?php echo $form->error($model,'nickname'); ?>
+	</div>
+	
+	<div class="row">
+	<?php echo $form->labelEx($model,'country'); ?>
+	<?php echo $form->textField($model,'country'); ?>
+	<?php echo $form->error($model,'country'); ?>
+	</div>
+	
+	<div class="row">
+	<?php echo $form->labelEx($model,'state'); ?>
+	<?php echo $form->textField($model,'state'); ?>
+	<?php echo $form->error($model,'state'); ?>
+	</div>
+	
+	<div class="row">
+	<?php echo $form->labelEx($model,'city'); ?>
+	<?php echo $form->textField($model,'city'); ?>
+	<?php echo $form->error($model,'city'); ?>
+	</div>
+	
 	<?php if (UserModule::doCaptcha('registration')): ?>
 	<div class="row">
 		<?php echo $form->labelEx($model,'verifyCode'); ?>

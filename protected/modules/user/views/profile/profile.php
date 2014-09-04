@@ -6,7 +6,8 @@ $this->menu=array(
 	((UserModule::isAdmin())
 		?array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin'))
 		:array()),
-    array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
+    //array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
+    array('label'=>UserModule::t('Home'), 'url'=>array('/site')),
     array('label'=>UserModule::t('Edit'), 'url'=>array('edit')),
     array('label'=>UserModule::t('Change password'), 'url'=>array('changepassword')),
     array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
@@ -41,6 +42,27 @@ $this->menu=array(
 		<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('email')); ?></th>
     	<td><?php echo CHtml::encode($model->email); ?></td>
 	</tr>
+	
+	<tr>
+		<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('nickname')); ?></th>
+    	<td><?php echo CHtml::encode($model->nickname); ?></td>
+	</tr>
+	
+	<tr>
+		<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('country')); ?></th>
+    	<td><?php echo CHtml::encode($model->country); ?></td>
+	</tr>
+	
+	<tr>
+		<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('state')); ?></th>
+    	<td><?php echo CHtml::encode($model->state); ?></td>
+	</tr>
+	
+	<tr>
+		<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('city')); ?></th>
+    	<td><?php echo CHtml::encode($model->city); ?></td>
+	</tr>
+	
 	<tr>
 		<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('create_at')); ?></th>
     	<td><?php echo $model->create_at; ?></td>

@@ -40,6 +40,8 @@ class ProfileController extends Controller
 		
 		if(isset($_POST['User']))
 		{
+		
+		//echo '<pre>'.print_r($_POST['User']).'</pre>'; exit;
 			$model->attributes=$_POST['User'];
 			$profile->attributes=$_POST['Profile'];
 			
